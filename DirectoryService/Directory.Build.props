@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
+        <PackageReference Include="StyleCop.Analyzers">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -16,11 +16,11 @@
     <PropertyGroup>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <EnableStyleCopAnalyzers>true</EnableStyleCopAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <AnalysisMode>All</AnalysisMode>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     </PropertyGroup>
-
-    <ItemGroup>
-        <AdditionalFiles Include="MyRules.ruleset" />
-    </ItemGroup>
 
     <PropertyGroup>
         <DocumentationFile>$(outputPath)$(AssemblyName).xml</DocumentationFile>

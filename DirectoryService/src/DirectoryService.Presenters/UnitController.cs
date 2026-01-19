@@ -1,7 +1,7 @@
 namespace DirectoryService.Presenters;
 
+using DirectoryService.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Contracts;
 
 [ApiController]
 [Route("[controller]")]

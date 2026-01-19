@@ -1,16 +1,32 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.OpenApi;
+
+var builder = WebApplication.CreateBuilder();
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Directory Service API",
+        Version = "v1",
+        Contact = new OpenApiContact
+        {
+            Name = "Michael",
+            Email = "mishu@mail.ru",
+        },
+    });
+});
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.MapOpenApi();
-    app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "DirectoryService"));
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Directory Service API");
+    options.RoutePrefix = "swagger/v1";
+});
 
 app.MapControllers();
-
 app.Run();

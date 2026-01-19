@@ -1,6 +1,6 @@
-﻿namespace DirectoryService.Domain.Position;
+﻿namespace DirectoryService.Domain.Location;
 
-public class Position
+public class LocationEntity
 {
     public Guid Id { get; set; }
 
@@ -8,5 +8,5 @@ public class Position
 
     public string Description { get; set; } = string.Empty;
 
-    public List<Guid> Units { get; set; } = [];
+    private List<Guid> Units { get; set; } = [];
 }
