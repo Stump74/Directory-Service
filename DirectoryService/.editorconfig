@@ -20,4 +20,5 @@ end_of_line = lf
 #STYLE COP ANALYZERS
 dotnet_diagnostic.SA1600.severity = none
 dotnet_diagnostic.SA1633.severity = none
+dotnet_diagnostic.SA1101.severity = none
 
