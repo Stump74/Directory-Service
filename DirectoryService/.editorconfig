@@ -1,0 +1,25 @@
+# editorconfig.org
+
+root = true
+
+# Настройки стиля кодирования
+[*]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+max_line_length = 120
+end_of_line = lf
+
+[*.cs]
+# C# files specific settings
+
+#CUSTOM
+
+#STYLE COP ANALYZERS
+dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.SA1633.severity = none
+dotnet_diagnostic.SA1101.severity = none
+dotnet_diagnostic.sa1309.severity = none
+
