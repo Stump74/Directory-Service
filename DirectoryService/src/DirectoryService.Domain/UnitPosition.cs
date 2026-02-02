@@ -2,7 +2,7 @@
 
 public class UnitPosition
 {
-    public Guid UnitId { get; set; }
+    private Guid UnitId { get; set; }
 
-    public Guid PositionId { get; set; }
+    private Guid PositionId { get; set; }
 }

@@ -21,4 +21,5 @@ end_of_line = lf
 dotnet_diagnostic.SA1600.severity = none
 dotnet_diagnostic.SA1633.severity = none
 dotnet_diagnostic.SA1101.severity = none
+dotnet_diagnostic.sa1309.severity = none
 

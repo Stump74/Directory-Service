@@ -4,16 +4,18 @@ using DirectoryService.Domain.ValueObjects;
 
 public class Location
 {
+    private readonly List<UnitLocation> _unitLocations = [];
+
     private Location(LocationId id)
     {
         Id = id;
     }
 
-    public LocationId Id { get; private set; }
+    public IReadOnlyList<UnitLocation> Units => _unitLocations;
 
-    public required string Title { get; set; }
+    private LocationId Id { get; set; }
 
-    public string Description { get; set; } = string.Empty;
+    private string? Title { get; set; }
 
-    private IReadOnlyList<UnitLocation> Units { get; set; } = [];
+    private string Description { get; set; } = string.Empty;
 }

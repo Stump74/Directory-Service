@@ -2,7 +2,7 @@
 
 public class UnitLocation
 {
-    public Guid UnitId { get; set; }
+    private Guid UnitId { get; set; }
 
-    public Guid LocationId { get; set; }
+    private Guid LocationId { get; set; }
 }
