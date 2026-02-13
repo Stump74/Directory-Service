@@ -1,8 +1,8 @@
 ﻿namespace DirectoryService.Domain;
 
-public class UnitPosition
+public class DepartmentPosition
 {
-    private Guid UnitId { get; set; }
+    private Guid DepartmentId { get; set; }
 
     private Guid PositionId { get; set; }
 }

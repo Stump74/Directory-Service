@@ -1,24 +1,41 @@
 ﻿namespace DirectoryService.Domain;
 
+using CSharpFunctionalExtensions;
 using DirectoryService.Domain.ValueObjects;
 
-public class Position
+public sealed class Position
 {
-    private readonly List<UnitPosition> _unitPositions = [];
+    public const int MAX_NAME_LENGTH = 100;
 
-    private Position(PositionId id, Address address)
+    public const int MIN_NAME_LENGTH = 3;
+
+    private readonly List<DepartmentPosition> _departmentPosition = [];
+
+    private Position(PositionId id, Name name, Description description)
     {
         Id = id;
-        Address = address;
+        Name = name;
+        Description = description;
+        CreatedAt = DateTime.UtcNow;
+        UpdatedAt = CreatedAt;
     }
 
-    public IReadOnlyList<UnitPosition> Units => _unitPositions;
+    public IReadOnlyList<DepartmentPosition> Units => _departmentPosition;
 
-    private PositionId Id { get; }
+    public PositionId Id { get; }
 
-    private string? Title { get; set; }
+    public Name Name { get; private set; }
 
-    private string Description { get; set; } = string.Empty;
+    public Description Description { get; private set; }
 
-    private Address Address { get; set; }
+    public DateTime CreatedAt { get; private set; }
+
+    public DateTime UpdatedAt { get; private set; }
+
+    public Deleted? DeletedAt { get; private set; }
+
+    public static Result<Position> Create(PositionId id, Name name, Description description)
+    {
+        return new Position(id, name, description);
+    }
 }

@@ -9,7 +9,7 @@ public record PositionId
 
     public Guid Value { get; }
 
-    public static PositionId NewUnitId() => new(Guid.NewGuid());
+    public static PositionId NewPositionId() => new(Guid.NewGuid());
 
     public static PositionId Empty() => new(Guid.Empty);
 }
