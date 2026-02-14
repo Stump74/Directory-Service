@@ -1,23 +1,46 @@
-namespace DirectoryService.Presenters;
+﻿namespace DirectoryService.Presenters;
 
 using DirectoryService.Contracts;
+using DirectoryService.Domain;
+using DirectoryService.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-public class UnitController : ControllerBase
+public class DepartmentController : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> Create(
-        [FromBody]CreateUnitDto request,
+        [FromBody]CreateDepartmentDto? request,
         CancellationToken cancellationToken)
     {
-        return this.Ok("Unit created");
+        if (request == null)
+        {
+            return this.BadRequest("Request body is required.");
+        }
+
+        var departmentId = DepartmentId.NewUnitId();
+
+        var title = Name.Create(request.Name, Department.MIN_NAME_LENGTH, Department.MAX_NAME_LENGTH);
+        if (title.IsFailure)
+        {
+            return this.BadRequest(title.Error);
+        }
+
+        var identifier = Identifier.Create(request.Identifier);
+        if (identifier.IsFailure)
+        {
+            return this.BadRequest(identifier.Error);
+        }
+
+        var department = Department.Create(departmentId, title.Value, identifier.Value);
+
+        return this.Ok("Department created");
     }
 
     [HttpGet]
     public async Task<IActionResult> Get(
-        [FromQuery]GetUnitDto request,
+        [FromQuery]GetDepartmentDto request,
         CancellationToken cancellationToken)
     {
         return this.Ok("Unit get");
@@ -34,7 +57,7 @@ public class UnitController : ControllerBase
     [HttpPut("{unitId:guid}")]
     public async Task<IActionResult> Update(
         [FromRoute]Guid unitId,
-        [FromBody]UpdateUnitDto request,
+        [FromBody]UpdateDepartmentDto request,
         CancellationToken cancellationToken)
     {
         return this.Ok("Unit updated");
