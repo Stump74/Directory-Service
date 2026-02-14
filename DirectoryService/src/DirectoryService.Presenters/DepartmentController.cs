@@ -40,7 +40,7 @@ public class DepartmentController : ControllerBase
 
     [HttpGet]
     public async Task<IActionResult> Get(
-        [FromQuery]GetUnitDto request,
+        [FromQuery]GetDepartmentDto request,
         CancellationToken cancellationToken)
     {
         return this.Ok("Unit get");
@@ -57,7 +57,7 @@ public class DepartmentController : ControllerBase
     [HttpPut("{unitId:guid}")]
     public async Task<IActionResult> Update(
         [FromRoute]Guid unitId,
-        [FromBody]UpdateUnitDto request,
+        [FromBody]UpdateDepartmentDto request,
         CancellationToken cancellationToken)
     {
         return this.Ok("Unit updated");

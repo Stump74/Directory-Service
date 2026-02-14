@@ -1,6 +1,7 @@
 ﻿namespace DirectoryService.Presenters;
 
 using DirectoryService.Contracts;
+using DirectoryService.Domain;
 using DirectoryService.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,21 +21,21 @@ public class LocationController : ControllerBase
 
         var locationId = LocationId.NewLocationId();
 
-        var title = Title.Create(request.Title);
-        if (title.IsFailure)
+        var name = Name.Create(request.Name, Location.MIN_NAME_LENGTH, Location.MAX_NAME_LENGTH);
+        if (name.IsFailure)
         {
-            return this.BadRequest(title.Error);
+            return this.BadRequest(name.Error);
         }
 
-        var description = Description.Create(request.Description);
-        if (description.IsFailure)
+        var timezone = Timezone.Create(request.Timezone);
+        if (timezone.IsFailure)
         {
-            return this.BadRequest(description.Error);
+            return this.BadRequest(timezone.Error);
         }
 
         var address = Address.Create(string.Empty, string.Empty, string.Empty, string.Empty);
 
-        var location = Domain.Location.Create(locationId, title.Value, description.Value, address);
+        var location = Location.Create(locationId, name.Value, address.Value, timezone.Value);
 
         return this.Ok("Location created");
     }

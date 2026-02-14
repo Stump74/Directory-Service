@@ -1,5 +1,8 @@
 ﻿namespace DirectoryService.Domain.ValueObjects;
 
+using CSharpFunctionalExtensions;
+using DirectoryService.Domain.Shared;
+
 public record Address
 {
     private Address(string postalCode, string country, string city, string street)
@@ -18,6 +21,9 @@ public record Address
 
     public string Street { get; }
 
-    public static Address Create(string postalCode, string country, string city, string street) =>
-        new(postalCode, country, city, street);
+    // TODO в будущем будет сделана проверка, пока непонятно что надо проверять и как
+    public static Result<Address, Error> Create(string postalCode, string country, string city, string street)
+    {
+        return new Address(postalCode, country, city, street);
+    }
 }

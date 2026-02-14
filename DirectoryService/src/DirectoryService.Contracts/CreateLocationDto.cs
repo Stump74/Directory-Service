@@ -1,3 +1,3 @@
 ﻿namespace DirectoryService.Contracts;
 
-public record CreateLocationDto(string Title, string Description);
+public record CreateLocationDto(string Name, string Timezone);

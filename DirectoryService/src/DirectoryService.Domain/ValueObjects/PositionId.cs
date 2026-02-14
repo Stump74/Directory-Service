@@ -1,5 +1,7 @@
 ﻿namespace DirectoryService.Domain.ValueObjects;
 
+using System;
+
 public record PositionId
 {
     private PositionId(Guid value)

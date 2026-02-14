@@ -1,8 +1,12 @@
 ﻿namespace DirectoryService.Domain;
 
+using DirectoryService.Domain.ValueObjects;
+
 public class DepartmentLocation
 {
-    private Guid DepartmentId { get; set; }
+    public DepartmentLocationId Id { get; } = DepartmentLocationId.NewDepartmentLocationId();
 
-    private Guid LocationId { get; set; }
+    public required DepartmentId DepartmentId { get; set; }
+
+    public required LocationId LocationId { get; set; }
 }

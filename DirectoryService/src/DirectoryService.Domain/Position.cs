@@ -1,5 +1,7 @@
 ﻿namespace DirectoryService.Domain;
 
+using System;
+using System.Collections.Generic;
 using CSharpFunctionalExtensions;
 using DirectoryService.Domain.ValueObjects;
 
