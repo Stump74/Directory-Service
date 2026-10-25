@@ -16,7 +16,7 @@ public sealed class Location
 
     public Name Name { get; }
 
-    public Address Address { get; set; }
+    public Address Address { get; }
 
     public DateTime CreatedAt { get; }
 
