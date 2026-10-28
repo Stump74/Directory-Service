@@ -21,7 +21,7 @@ public sealed record Name
 
         if (value.Length is < MinNameLength or > MaxNameLength)
         {
-            return Error.Validation("Name length","Name must be between {MinNameLength} and {MaxNameLength} characters.");
+            return Error.Validation("Name length", $"Name must be between {MinNameLength} and {MaxNameLength} characters.");
         }
 
         return new Name(value);

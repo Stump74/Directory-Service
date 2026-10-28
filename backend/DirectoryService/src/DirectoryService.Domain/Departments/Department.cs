@@ -14,7 +14,13 @@ public sealed class Department
         CreatedAt = createdAt ?? DateTime.UtcNow;
         UpdatedAt = updatedAt ?? DateTime.UtcNow;
     }
-
+    // For EF Core
+    private Department()
+    {
+        Slug = null!;
+        Name = null!;
+        Path = null!;
+    } 
     public Guid Id { get; }
 
     public Slug Slug { get; }

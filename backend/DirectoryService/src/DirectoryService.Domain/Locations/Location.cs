@@ -12,6 +12,12 @@ public sealed class Location
         CreatedAt = createdAt ?? DateTime.UtcNow;
         UpdatedAt = updatedAt ?? DateTime.UtcNow;
     }
+    // For EF Core
+    private Location()
+    {
+        Name = null!;
+        Address = null!;
+    }
     public Guid Id { get; }
 
     public Name Name { get; }

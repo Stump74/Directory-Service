@@ -15,7 +15,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddHealthChecks();
 
-builder.Services.AddPostgres(builder.Configuration["POSTGRES_DSN"]!);
+var dsn = builder.Configuration["POSTGRES_DSN"];
+
+if (string.IsNullOrEmpty(dsn) || string.IsNullOrWhiteSpace(dsn))
+    throw new InvalidOperationException("POSTGRES_DSN is not set in environment variables or appsettings.json");
+
+builder.Services.AddPostgres(dsn);
 
 var app = builder.Build();
 

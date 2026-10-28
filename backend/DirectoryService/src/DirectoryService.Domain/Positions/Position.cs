@@ -13,6 +13,11 @@ public sealed class Position
         CreatedAt = createdAt ?? DateTime.UtcNow;
         UpdatedAt = updatedAt ?? DateTime.UtcNow;
     }
+    // For EF Core
+    private Position()
+    {
+        Name = null!;
+    }
     public Guid Id { get; }
 
     public Name Name { get; }
