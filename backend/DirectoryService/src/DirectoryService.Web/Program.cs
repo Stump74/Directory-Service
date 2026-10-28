@@ -1,4 +1,9 @@
+using DirectoryService.Infrastructure.Postgres;
+using DotNetEnv;
 using Scalar.AspNetCore;
+
+// Читаем .env
+Env.TraversePath().Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +14,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
 builder.Services.AddHealthChecks();
+
+builder.Services.AddPostgres(builder.Configuration["POSTGRES_DSN"]!);
 
 var app = builder.Build();
 
