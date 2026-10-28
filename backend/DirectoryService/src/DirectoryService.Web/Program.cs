@@ -1,4 +1,9 @@
+using DirectoryService.Infrastructure.Postgres;
+using DotNetEnv;
 using Scalar.AspNetCore;
+
+// Читаем .env
+Env.TraversePath().Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +14,13 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
 builder.Services.AddHealthChecks();
+
+var dsn = builder.Configuration["POSTGRES_DSN"];
+
+if (string.IsNullOrEmpty(dsn) || string.IsNullOrWhiteSpace(dsn))
+    throw new InvalidOperationException("POSTGRES_DSN is not set in environment variables or appsettings.json");
+
+builder.Services.AddPostgres(dsn);
 
 var app = builder.Build();
 
