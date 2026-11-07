@@ -6,9 +6,9 @@ namespace DirectoryService.Domain.Positions;
 
 public sealed class Position
 {
-    private Position(Name name, Guid? id, DateTime? createdAt, DateTime? updatedAt)
+    private Position(Name name, DateTime? createdAt, DateTime? updatedAt)
     {
-        Id = id ?? Guid.CreateVersion7();
+        Id = PositionId.New(id: null);
         Name = name;
         CreatedAt = createdAt ?? DateTime.UtcNow;
         UpdatedAt = updatedAt ?? DateTime.UtcNow;
@@ -16,9 +16,10 @@ public sealed class Position
     // For EF Core
     private Position()
     {
+        Id = null!;
         Name = null!;
     }
-    public Guid Id { get; }
+    public PositionId Id { get; }
 
     public Name Name { get; }
 
@@ -26,8 +27,8 @@ public sealed class Position
 
     public DateTime? UpdatedAt { get; }
 
-    public static Result<Position, Error> Create(Name name, Guid? id = null, DateTime? createdAt = null, DateTime? updatedAt = null)
+    public static Result<Position, Error> Create(Name name, DateTime? createdAt = null, DateTime? updatedAt = null)
     {
-        return new Position(name, id, createdAt, updatedAt);
+        return new Position(name, createdAt, updatedAt);
     }
 }

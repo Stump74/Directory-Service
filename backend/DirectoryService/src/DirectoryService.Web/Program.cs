@@ -1,5 +1,10 @@
+using System;
 using DirectoryService.Infrastructure.Postgres;
 using DotNetEnv;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Scalar.AspNetCore;
 
 // Читаем .env
