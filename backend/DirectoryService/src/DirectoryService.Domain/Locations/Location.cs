@@ -4,9 +4,9 @@ namespace DirectoryService.Domain.Locations;
 
 public sealed class Location
 {
-    private Location(Name name, Address address, Guid? id, DateTime? createdAt, DateTime? updatedAt)
+    private Location(Name name, Address address, DateTime? createdAt, DateTime? updatedAt)
     {
-        Id = id ?? Guid.CreateVersion7();
+        Id = LocationId.New(id: null);
         Name = name;
         Address = address;
         CreatedAt = createdAt ?? DateTime.UtcNow;
@@ -15,10 +15,11 @@ public sealed class Location
     // For EF Core
     private Location()
     {
+        Id = null!;
         Name = null!;
         Address = null!;
     }
-    public Guid Id { get; }
+    public LocationId Id { get; }
 
     public Name Name { get; }
 
@@ -28,8 +29,8 @@ public sealed class Location
 
     public DateTime? UpdatedAt { get; }
 
-    public static Location Create(Name name, Address address, Guid? id = null, DateTime? createdAt = null, DateTime? updatedAt = null)
+    public static Location Create(Name name, Address address, DateTime? createdAt = null, DateTime? updatedAt = null)
     {
-        return new Location(name, address, id, createdAt, updatedAt);
+        return new Location(name, address, createdAt, updatedAt);
     }
 }

@@ -7,7 +7,12 @@ namespace DirectoryService.Infrastructure.Postgres;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+    }
     public DbSet<Location> Locations => Set<Location>();
     public DbSet<Department> Departments => Set<Department>();
     public DbSet<Position> Positions => Set<Position>();
+    public DbSet<DepartmentLocation> DepartmentLocations => Set<DepartmentLocation>();
 }

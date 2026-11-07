@@ -4,9 +4,9 @@ namespace DirectoryService.Domain.Departments;
 
 public sealed class Department
 {
-    private Department( Slug slug, Name name, Path path, Guid? id, Guid? parentId, DateTime? createdAt, DateTime? updatedAt)
+    private Department( Slug slug, Name name, Path path, DepartmentId? parentId, DateTime? createdAt, DateTime? updatedAt)
     {
-        Id = id ?? Guid.CreateVersion7();
+        Id = DepartmentId.New(id: null);
         Slug = slug;
         ParentId = parentId;
         Name = name;
@@ -17,15 +17,16 @@ public sealed class Department
     // For EF Core
     private Department()
     {
+        Id = null!;
         Slug = null!;
         Name = null!;
         Path = null!;
-    } 
-    public Guid Id { get; }
+    }
+    public DepartmentId Id { get; }
 
     public Slug Slug { get; }
 
-    public Guid? ParentId { get; }
+    public DepartmentId? ParentId { get; }
 
     public Name Name { get; }
 
@@ -35,8 +36,8 @@ public sealed class Department
 
     public DateTime? UpdatedAt { get; }
 
-    public static Department Create( Slug slug, Name name, Path path, Guid? id = null, Guid? parentId = null, DateTime? createdAt = null, DateTime? updatedAt = null)
+    public static Department Create(Slug slug, Name name, Path path, DepartmentId? parentId = null, DateTime? createdAt = null, DateTime? updatedAt = null)
     {
-        return new Department(slug, name, path, id, parentId, createdAt, updatedAt);
+        return new Department(slug, name, path, parentId, createdAt, updatedAt);
     }
 }
