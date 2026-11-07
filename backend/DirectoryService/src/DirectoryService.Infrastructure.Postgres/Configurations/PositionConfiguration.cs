@@ -1,3 +1,4 @@
+using DirectoryService.Domain.LengthLimit;
 using DirectoryService.Domain.Positions;
 using DirectoryService.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,12 @@ public class PositionConfiguration : IEntityTypeConfiguration<Position>
         builder.HasKey(p => p.Id).HasName("pk_positions");
 
         builder.Property(p => p.Id)
+            .HasColumnName("id")
             .HasConversion(p => p.Value, id => PositionId.New(id));
-        
+
         builder.Property(p => p.Name)
+            .HasColumnName("name")
+            .HasMaxLength(LengthLimits.MaxNameLength)
             .HasConversion(n => n.Value, value => Name.Create(value).Value);
     }
 }

@@ -1,3 +1,4 @@
+using DirectoryService.Domain.LengthLimit;
 using DirectoryService.Domain.Locations;
 using DirectoryService.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -13,21 +14,24 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
         builder.HasKey(l => l.Id).HasName("pk_locations");
 
         builder.Property(l => l.Id)
+            .HasColumnName("id")
             .HasConversion(l => l.Value, id => LocationId.New(id));
 
         builder.Property(l => l.Name)
+            .HasColumnName("name")
+            .HasMaxLength(LengthLimits.MaxNameLength)
             .HasConversion(n => n.Value,
                 value => Name.Create(value).Value);
 
         builder.ComplexProperty(l => l.Address, address =>
         {
-            address.Property(a => a.Street).HasColumnName("street");
+            address.Property(a => a.Street).HasColumnName("street").HasMaxLength(LengthLimits.MaxNameLength);
 
-            address.Property(a => a.City).HasColumnName("city");
+            address.Property(a => a.City).HasColumnName("city").HasMaxLength(LengthLimits.MinNameLength);
 
-            address.Property(a => a.Country).HasColumnName("country");
+            address.Property(a => a.Country).HasColumnName("country").HasMaxLength(LengthLimits.MinNameLength);
 
-            address.Property(a => a.House).HasColumnName("house");
+            address.Property(a => a.House).HasColumnName("house").HasMaxLength(LengthLimits.MinNameLength);
         });
     }
 }
